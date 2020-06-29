@@ -18,14 +18,11 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
 
-    # Runs a single command using the runners shell
-    - name: Run a one-line script
-      run: echo Hello, world!
-     - name: Run the sh-checker
-       uses: luizm/action-sh-checker@v0.1.4
-       env:
-         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-         # SHELLCHECK_OPTS: -e SC1004 # It is posible to exclude some shellcheck warnings.
-       with:
-         sh_checker_comment: true
-         # sh_checker_exclude: ".terraform ^dir/example.sh"
+    - name: Run the sh-checker
+      uses: luizm/action-sh-checker@v0.1.4
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        # SHELLCHECK_OPTS: -e SC1004 # It is posible to exclude some shellcheck warnings.
+      with:
+        sh_checker_comment: true
+        # sh_checker_exclude: ".terraform ^dir/example.sh"
