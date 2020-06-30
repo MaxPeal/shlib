@@ -191,6 +191,7 @@ End of functions from https://github.com/client9/posixshell
 EOF
  
 OWNER=mvdan
+# shellcheck disable=SC2209 # this is intentional, to ignore SC2209: Use var=$(command) to assign output (or quote to assign string). 
 REPO=sh
 BINARY=shfmt
 BINDIR=${BINDIR:-./bin}
