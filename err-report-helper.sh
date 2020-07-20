@@ -2,7 +2,7 @@
 printblock() {
 printf %s\\n  "#----------------------------------------------------"
 }
-err-report-helper() {
+err_report_helper() {
 printblock
 printf %s\\n  "uname -m = `(uname -m) 2>/dev/null || echo unknown`"
 printf %s\\n  "uname -r = `(uname -r) 2>/dev/null || echo unknown`"
@@ -112,4 +112,4 @@ else # All other shells: examine $0 for known shell binary filenames
 fi
 
 # FIXME see https://stackoverflow.com/a/28776166
-[ "$sourced" ] || err-report-helper
+[ "$sourced" ] || err_report_helper
