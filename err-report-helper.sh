@@ -1,9 +1,16 @@
 #!/bin/sh
+err-report-helper() {
+printf %s\\n  "#----------------------------------------------------"
 printf %s\\n  "uname -m = `(uname -m) 2>/dev/null || echo unknown`"
+printf %s\\n  "#----------------------------------------------------"
 printf %s\\n  "uname -r = `(uname -r) 2>/dev/null || echo unknown`"
+printf %s\\n  "#----------------------------------------------------"
 printf %s\\n  "uname -s = `(uname -s) 2>/dev/null || echo unknown`"
+printf %s\\n  "#----------------------------------------------------"
 printf %s\\n  "uname -v = `(uname -v) 2>/dev/null || echo unknown`"
+printf %s\\n  "#----------------------------------------------------"
 printf %s\\n  "/usr/bin/uname -p = `(/usr/bin/uname -p) 2>/dev/null`"
+printf %s\\n  "#----------------------------------------------------"
 printf %s\\n  "/bin/uname -X     = `(/bin/uname -X) 2>/dev/null`"
 printf %s\\n  "hostinfo               = `(hostinfo) 2>/dev/null`"
 printf %s\\n  "/bin/universe          = `(/bin/universe) 2>/dev/null`"
@@ -82,3 +89,19 @@ printf %s\\n  "getconf SC_KERNEL_BITS = `(getconf SC_KERNEL_BITS) 2>/dev/null`"
 printf %s\\n  "getconf KERNEL_BITS = `(getconf KERNEL_BITS) 2>/dev/null`"
 printf %s\\n  "getconf LONG_BIT = `(getconf LONG_BIT) 2>/dev/null`"
 printf %s\\n  "cat /proc/cpuinfo = `(cat /proc/cpuinfo) 2>/dev/null`"
+}
+
+sourced=0
+if [ -n "$ZSH_EVAL_CONTEXT" ]; then 
+  case $ZSH_EVAL_CONTEXT in *:file) sourced=1;; esac
+elif [ -n "$KSH_VERSION" ]; then
+  [ "$(cd $(dirname -- $0) && pwd -P)/$(basename -- $0)" != "$(cd $(dirname -- ${.sh.file}) && pwd -P)/$(basename -- ${.sh.file})" ] && sourced=1
+elif [ -n "$BASH_VERSION" ]; then
+  (return 0 2>/dev/null) && sourced=1 
+else # All other shells: examine $0 for known shell binary filenames
+  # Detects `sh` and `dash`; add additional shell filenames as needed.
+  case ${0##*/} in sh|dash) sourced=1;; esac
+fi
+
+# FIXME see https://stackoverflow.com/a/28776166
+[ "$sourced" ] || err-report-helper
