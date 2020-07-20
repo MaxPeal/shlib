@@ -4,6 +4,8 @@ printf %s\\n  "#----------------------------------------------------------------
 }
 ErrReportHelper() {
 printblock
+printblock
+printblock
 printf %s\\n  "uname -m = `(uname -m) 2>/dev/null || echo unknown`"
 printf %s\\n  "uname -r = `(uname -r) 2>/dev/null || echo unknown`"
 printf %s\\n  "uname -s = `(uname -s) 2>/dev/null || echo unknown`"
@@ -96,6 +98,8 @@ printf %s\\n  "getconf KERNEL_BITS = `(getconf KERNEL_BITS) 2>/dev/null`"
 printf %s\\n  "getconf LONG_BIT = `(getconf LONG_BIT) 2>/dev/null`"
 printblock
 printf %s\\n  "cat /proc/cpuinfo = `(cat /proc/cpuinfo) 2>/dev/null`"
+printblock
+printblock
 printblock
 }
 
