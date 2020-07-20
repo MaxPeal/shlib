@@ -112,4 +112,4 @@ else # All other shells: examine $0 for known shell binary filenames
 fi
 
 # FIXME see https://stackoverflow.com/a/28776166
-[ "0" = "$sourced" ] || ErrReportHelper
+[ "0" != "$sourced" ] || ErrReportHelper
